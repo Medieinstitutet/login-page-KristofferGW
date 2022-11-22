@@ -8,8 +8,6 @@ let passwords = "test";
 if (localStorage.getItem("userName")) {
     console.log("Det finns något i LS");
     //Hämta inloggade användare i localStorage
-    let userName = localStorage.getItem("userName");
-    let password = localStorage.getItem("password");
 
     loggedInMenu();
 
