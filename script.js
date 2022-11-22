@@ -7,8 +7,7 @@ let passwords = "test";
 // KOLLA OM ANVÄNDAREN ÄR INLOGGAD MED HJÄLP AV LOCAL STORAGE
 if (localStorage.getItem("userName")) {
     console.log("Det finns något i LS");
-    //Hämta inloggade användare i localStorage
-
+    
     loggedInMenu();
 
     loggedInMain();
