@@ -1,8 +1,8 @@
 document.body.style.backgroundColor = "black";
 document.body.style.color = "white";
 
-let usernames = "Janne";
-let passwords = "test";
+let userNames = ["Janne", "Alice", "Karin"];
+let passwords = ["test", "test2", "test3"];
 
 // KOLLA OM ANVÄNDAREN ÄR INLOGGAD MED HJÄLP AV LOCAL STORAGE
 if (localStorage.getItem("userName")) {
@@ -35,23 +35,21 @@ function notLoggedInMenu() {
         //OM användaren inte är registerarad, kalla på incorrectLogIn();
     logInBtn.addEventListener("click", () => {
         function isUserRegistered() {
-            //kolla att användaramn och lösenord som användaren angivit finns i arrayen users och passwords. Returnera true eller false.
-            if (nameField.value == usernames && passField.value == passwords) {
-                console.log("Du har angivit rätt inlogg");
-                let userName = nameField.value;
-                let password = passField.value;
+            let userName = nameField.value;
+            let password = passField.value;
+
+            if (userNames.indexOf(userName) === passwords.indexOf(password) && userNames.indexOf(userName) >= 0) {
                 localStorage.setItem("userName", userName);
                 localStorage.setItem("password", password);
                 return true;
-            } else {
-                incorrectLogIn();
-                console.log("ogiltig login från isUserRegistered");
             }
+            
+            
         }
         if (isUserRegistered()) {
             loggedInMenu();
             loggedInMain();
-            console.log("log från dra fram inloggade menyer");
+
         } else {
             incorrectLogIn();
         }
@@ -60,7 +58,7 @@ function notLoggedInMenu() {
 }
 
 function notLoggedInMain() {
-    console.log("Console log från notLoggedInMain");
+
     let main = document.getElementById("main");
     main.innerText = "Hej! Vänligen logga in med ditt användarnamn och lösenord ovan.";
 }
