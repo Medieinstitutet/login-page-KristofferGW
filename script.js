@@ -2,7 +2,7 @@ document.body.style.backgroundColor = "black";
 document.body.style.color = "white";
 
 let usernames = "Janne";
-let passwords ="test";
+let passwords = "test";
 
 // KOLLA OM ANVÄNDAREN ÄR INLOGGAD MED HJÄLP AV LOCAL STORAGE
 if (localStorage.getItem("loggedInOrNot")) {
@@ -25,9 +25,9 @@ if (localStorage.getItem("loggedInOrNot")) {
 
 function notLoggedInMenu() {
     //Skapa inputs för användarnamn och lösenord i main.
-    const nameField = document.createElement("input");
+    let nameField = document.createElement("input");
     menu.appendChild(nameField);
-    const passField = document.createElement("input");
+    let passField = document.createElement("input");
     menu.appendChild(passField);
 
     //Skapa logga in knapp med eventListener.
@@ -38,10 +38,20 @@ function notLoggedInMenu() {
         //OM användaren är registererad, kalla på loggedInMenu(); och loggedInMain();
         //OM användaren inte är registerarad, kalla på incorrectLogIn();
     logInBtn.addEventListener("click", () => {
-        console.log("Klick på logInBtn");
+        function isUserRegistered() {
+            //kolla att användaramn och lösenord som användaren angivit finns i arrayen users och passwords. Returnera true eller false.
+            if (nameField.value == usernames && passField.value == passwords) {
+                console.log("Du har angivit rätt inlogg");
+                return true;
+            } else {
+                incorrectLogIn();
+                console.log("ogiltig login från isUserRegistered");
+            }
+        }
         if (isUserRegistered()) {
             loggedInMenu();
             loggedInMain();
+            console.log("log från dra fram inloggade menyer");
         } else {
             incorrectLogIn();
         }
@@ -55,19 +65,16 @@ function notLoggedInMain() {
     main.innerText = "Hej! Vänligen logga in med ditt användarnamn och lösenord ovan.";
 }
 
-function isUserRegistered(usernames, passwords) {
-    //kolla att användaramn och lösenord som användaren angivit finns i arrayen users och passwords. Returnera true eller false.
-    const nameField = document.createElement("input");
-    const passField = document.createElement("input");
-    if (nameField.value === usernames && passField.value === passwords) {
-        console.log("Du har angivit rätt inlogg");
-    } else {
-        incorrectLogIn();
-    }
-}
-
 function loggedInMenu() {
     //Skapa logga ut-knapp
+    document.getElementById("menu").innerHTML = "";
+    const logo = document.createElement("h1");
+    logo.innerText = "Fort Knox"
+    menu.appendChild(logo);
+    
+    const logOffBtn = document.createElement("button");
+    logOffBtn.innerText = "Logga ut"
+    menu.appendChild(logOffBtn);
 
     //eventListener på knappen som tömmer localStorage och kallar på notLoggedInMenu() och notLoggedInMain().
 }
@@ -82,3 +89,4 @@ function incorrectLogIn() {
     let main = document.getElementById("main");
     main.innerText = "Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.";
 }
+
