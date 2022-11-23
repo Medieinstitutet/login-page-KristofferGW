@@ -1,10 +1,6 @@
 document.body.style.backgroundColor = "black";
 document.body.style.color = "white";
 
-//Spara userNames och passwords i localStorage
-let userNames = ["Janne", "Alice", "Karin"];
-let passwords = ["test", "test2", "test3"];
-
 if (!localStorage.getItem("registeredUsers")) {
     fetch("registeredUsers.json")
     .then (res => res.json())
@@ -21,18 +17,13 @@ if (!localStorage.getItem("savedPasswords")) {
     })
 }
 
-//Skapa två nya registered user keys i localStorage som sparar den inloggade användaren.
-
-//Skriv om nedan för att kolla efter logedInUser istället för userName
 if (localStorage.getItem("userName")) {
-    console.log("Det finns något i LS");
     
     loggedInMenu();
 
     loggedInMain();
 
 } else {
-    console.log("Det finns inget i LS");
     notLoggedInMenu();
 
     notLoggedInMain();
@@ -48,13 +39,11 @@ function notLoggedInMenu() {
     logInBtn.innerText = "Logga in"
     menu.appendChild(logInBtn);
 
-    //Skapa "registrera användare" knapp med länk till funktionen registerUserForm()
     const registerBtn = document.createElement("button");
     registerBtn.innerText = "Skapa ny användare"
     menu.appendChild(registerBtn);
 
     registerBtn.addEventListener("click", () => {
-        console.log("Console log from registerBtn event listener");
         registerUserForm();
     })
 
@@ -71,13 +60,6 @@ function notLoggedInMenu() {
                 localStorage.setItem("password", password);
                 return true;
             }
-
-            // if (userNames.indexOf(userName) === passwords.indexOf(password) && userNames.indexOf(userName) >= 0) {
-            //     localStorage.setItem("userName", userName);
-            //     localStorage.setItem("password", password);
-            //     return true;
-            // }
-            
             
         }
         if (isUserRegistered()) {
@@ -118,13 +100,11 @@ function loggedInMenu() {
 function registerUserForm() {
     
     emptyMenuRenderLogo()
-    // Rubrik "Registrera ny användare med formuläret nedan"
     main.innerHTML = "";
     const registerHeader = document.createElement("h2");
     registerHeader.innerText = "Registrera ny användare";
     main.appendChild(registerHeader);
 
-    // Inputs för användarnamn och lösenord
     const newUserNamePrompt = document.createElement("h3");
     newUserNamePrompt.innerText = "Användarnamn";
     main.appendChild(newUserNamePrompt);
@@ -147,17 +127,13 @@ function registerUserForm() {
     main.appendChild(newUserBtn);
 
     newUserBtn.addEventListener("click", () => {
-        console.log("Console log from newUserBtn EventListener");
         registerNewUser();
     })
     function registerNewUser() {
 
-        console.log("Console log from registerNewUser()");
         const newUserName = newUserNameField.value;
-        console.log(newUserName);
 
         const newPassword = newPasswordField.value;
-        console.log(newPassword);
 
         if (newUserName && newPassword) {
         let currentUserList = JSON.parse(localStorage.getItem("registeredUsers"));
@@ -165,10 +141,8 @@ function registerUserForm() {
         let currentPasswords = JSON.parse(localStorage.getItem("savedPasswords"));
 
         currentUserList.push(newUserName);
-        console.log(currentUserList);
 
         currentPasswords.push(newPassword);
-        console.log(currentPasswords);
 
         localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
 
@@ -184,14 +158,12 @@ function registerUserForm() {
 function loggedInMain() {
 
     let userName = localStorage.getItem("userName");
-    console.log("userName från loggedInMain", userName);
     document.getElementById("main").innerHTML = "";
     document.getElementById("main").innerHTML = `Hej ${userName}! Välkommen till inloggat läge.`;
 }
 
 function incorrectLogIn() {
 
-    console.log("Console log från incorrectLogIn()");
     let main = document.getElementById("main");
     main.innerText = "Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.";
 }
@@ -199,7 +171,7 @@ function incorrectLogIn() {
 function emptyMenuRenderLogo() {
     document.getElementById("menu").innerHTML = "";
     const logo = document.createElement("h1");
-    logo.innerText = "Fort Knox"
+    logo.innerText = "Fort Knox";
     menu.appendChild(logo);
 
 }
