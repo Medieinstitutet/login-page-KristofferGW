@@ -30,9 +30,16 @@ if (localStorage.getItem("userName")) {
 };
 
 function notLoggedInMenu() {
+    const namePrompt = document.createElement("label");
+    namePrompt.innerText = "Användarnamn: ";
+    menu.appendChild(namePrompt);
     let nameField = document.createElement("input");
     menu.appendChild(nameField);
+    const passPrompt = document.createElement("label");
+    passPrompt.innerText = " Lösenord: ";
+    menu.appendChild(passPrompt);
     let passField = document.createElement("input");
+    passField.type = 'password';
     menu.appendChild(passField);
 
     const logInBtn = document.createElement("button");
@@ -117,6 +124,7 @@ function registerUserForm() {
     main.appendChild(newPasswordPrompt);
 
     const newPasswordField = document.createElement("input");
+    newPasswordField .type = "password";
     main.appendChild(newPasswordField);
 
     const br = document.createElement("br");
@@ -125,6 +133,8 @@ function registerUserForm() {
     const newUserBtn = document.createElement("button");
     newUserBtn.innerText ="Registrera";
     main.appendChild(newUserBtn);
+
+    const userExistsText = document.createElement("p");
 
     newUserBtn.addEventListener("click", () => {
         registerNewUser();
@@ -140,15 +150,23 @@ function registerUserForm() {
 
         let currentPasswords = JSON.parse(localStorage.getItem("savedPasswords"));
 
-        currentUserList.push(newUserName);
+        if (!currentUserList.includes(newUserName)) {
 
-        currentPasswords.push(newPassword);
+            currentUserList.push(newUserName);
 
-        localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
+            currentPasswords.push(newPassword);
 
-        localStorage.setItem("savedPasswords", JSON.stringify(currentPasswords));
+            localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
 
-        registrationConfirmed();
+            localStorage.setItem("savedPasswords", JSON.stringify(currentPasswords));
+
+            registrationConfirmed();
+        } else {
+
+            main.appendChild(userExistsText);
+            userExistsText.innerText = "";
+            userExistsText.innerText = "Användarnamnet du angivit finns redan. Vänligen välj ett annat."
+        }
         
         }
         
