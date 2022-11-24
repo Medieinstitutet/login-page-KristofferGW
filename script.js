@@ -159,7 +159,7 @@ function loggedInMain() {
 
     let userName = localStorage.getItem("userName");
     document.getElementById("main").innerHTML = "";
-    document.getElementById("main").innerHTML = `Hej ${userName}! Välkommen till inloggat läge.`;
+    document.getElementById("main").innerHTML = `Hej ${userName}! Välkommen till inloggat läge. <br> <img src="img/grad_dance1_blue.gif" width="400" height="auto">`;
 }
 
 function incorrectLogIn() {
@@ -171,7 +171,7 @@ function incorrectLogIn() {
 function emptyMenuRenderLogo() {
     document.getElementById("menu").innerHTML = "";
     const logo = document.createElement("h1");
-    logo.innerText = "Fort Knox";
+    logo.innerText = "PoC inloggninssida";
     menu.appendChild(logo);
 
 }
