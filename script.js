@@ -163,22 +163,22 @@ function registerUserForm() {
 
         let currentPasswords = JSON.parse(localStorage.getItem("savedPasswords"));
 
-        if (!currentUserList.includes(newUserName)) {
+            if (!currentUserList.includes(newUserName)) {
 
-            currentUserList.push(newUserName);
+                currentUserList.push(newUserName);
 
-            currentPasswords.push(newPassword);
+                currentPasswords.push(newPassword);
 
-            localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
+                localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
 
-            localStorage.setItem("savedPasswords", JSON.stringify(currentPasswords));
+                localStorage.setItem("savedPasswords", JSON.stringify(currentPasswords));
 
-            registrationConfirmed();
-        } else {
+                registrationConfirmed();
+            } else {
 
-            main.appendChild(registerError);
-            registerError.innerText = "";
-            registerError.innerText = "Användarnamnet du angivit finns redan. Vänligen välj ett annat."
+                main.appendChild(registerError);
+                registerError.innerText = "";
+                registerError.innerText = "Användarnamnet du angivit finns redan. Vänligen välj ett annat."
         }
         
         } else {
