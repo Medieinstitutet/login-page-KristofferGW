@@ -134,6 +134,19 @@ function registerUserForm() {
     newUserBtn.innerText ="Registrera";
     main.appendChild(newUserBtn);
 
+    const wantToLogInText = document.createElement("p");
+    wantToLogInText.innerText = "Har du redan ett konto?"
+    main.appendChild(wantToLogInText);
+
+    const backToLogIn = document.createElement("button");
+    backToLogIn.innerText = "Logga in här";
+    main.appendChild(backToLogIn);
+
+    backToLogIn.addEventListener("click", () => {
+        notLoggedInMenu();
+        notLoggedInMain();
+    })
+
     const registerError = document.createElement("p");
 
     newUserBtn.addEventListener("click", () => {
