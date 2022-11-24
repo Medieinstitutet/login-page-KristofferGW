@@ -134,13 +134,13 @@ function registerUserForm() {
     newUserBtn.innerText ="Registrera";
     main.appendChild(newUserBtn);
 
-    const userExistsText = document.createElement("p");
+    const registerError = document.createElement("p");
 
     newUserBtn.addEventListener("click", () => {
         registerNewUser();
     })
     function registerNewUser() {
-
+        
         const newUserName = newUserNameField.value;
 
         const newPassword = newPasswordField.value;
@@ -163,11 +163,15 @@ function registerUserForm() {
             registrationConfirmed();
         } else {
 
-            main.appendChild(userExistsText);
-            userExistsText.innerText = "";
-            userExistsText.innerText = "Användarnamnet du angivit finns redan. Vänligen välj ett annat."
+            main.appendChild(registerError);
+            registerError.innerText = "";
+            registerError.innerText = "Användarnamnet du angivit finns redan. Vänligen välj ett annat."
         }
         
+        } else {
+            main.appendChild(registerError);
+            registerError.innerText = "";
+            registerError.innerText = "Du måste ange ett användarnamn och ett lösenord för att registrera ett konto.";
         }
         
     }
