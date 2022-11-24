@@ -171,7 +171,7 @@ function incorrectLogIn() {
 function emptyMenuRenderLogo() {
     document.getElementById("menu").innerHTML = "";
     const logo = document.createElement("h1");
-    logo.innerText = "PoC inloggninssida";
+    logo.innerText = "PoC inloggningssida";
     menu.appendChild(logo);
 
 }
