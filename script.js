@@ -1,6 +1,12 @@
 document.body.style.backgroundColor = "black";
 document.body.style.color = "white";
 
+import User from "./user.js";
+import RegisteredUsers from "./registeredUsers";
+
+//HÄMTA REGISTRERADE ANVÄNDARE
+// Gär om if (!localStorage.getItem("registeredUsers")) och if (!localStorage.getItem("savedPasswords")) till en if-sats
+// som letar igenom en object array.
 if (!localStorage.getItem("registeredUsers")) {
     fetch("registeredUsers.json")
     .then (res => res.json())
@@ -17,6 +23,7 @@ if (!localStorage.getItem("savedPasswords")) {
     })
 }
 
+//KOLLA OM NÅGON ÄR INLOGGAD
 if (localStorage.getItem("userName")) {
     
     loggedInMenu();
@@ -59,9 +66,11 @@ function notLoggedInMenu() {
             let userName = nameField.value;
             let password = passField.value;
 
+            //HÄMTA I EN OBJECT ARRAY ISTÄLLET
             let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers"));
             let savedPasswords = JSON.parse(localStorage.getItem("savedPasswords"));
 
+            //SKRIV OM SÅ ATT VI LETAR MATCHNING I EN OBJECT ARRAY ISTÄLLET
             if (registeredUsers.indexOf(userName) === savedPasswords.indexOf(password) && registeredUsers.indexOf(userName) >= 0) {
                 localStorage.setItem("userName", userName);
                 localStorage.setItem("password", password);
@@ -97,6 +106,7 @@ function loggedInMenu() {
 
     logOffBtn.addEventListener("click", () => {
         emptyMenuRenderLogo();
+        //SKRIV OM DETTA UTIFRÅN ATT ANVÄNDARNAMN OCH LÖSENORD LIGGER I SAMMA OBJECT ARRAY.
         localStorage.removeItem("userName");
         localStorage.removeItem("password");
         notLoggedInMenu();
@@ -159,6 +169,8 @@ function registerUserForm() {
         const newPassword = newPasswordField.value;
 
         if (newUserName && newPassword) {
+
+        //SKRIV OM KODEN NEDAN UTIFRÅN ATT ALLT LIGGER I EN OBJECT ARRAY.
         let currentUserList = JSON.parse(localStorage.getItem("registeredUsers"));
 
         let currentPasswords = JSON.parse(localStorage.getItem("savedPasswords"));
@@ -172,6 +184,8 @@ function registerUserForm() {
                 localStorage.setItem("registeredUsers", JSON.stringify(currentUserList));
 
                 localStorage.setItem("savedPasswords", JSON.stringify(currentPasswords));
+
+            // KOMMENTAREN OVAN GÄLLER HIT.
 
                 registrationConfirmed();
             } else {
@@ -191,7 +205,7 @@ function registerUserForm() {
 }
 
 function loggedInMain() {
-
+    //SKRIV UTIFRÅN ATT LÖSENORD OCH AANVÄNDARNAMN LIGGER I SAMMA OBJECT
     let userName = localStorage.getItem("userName");
     document.getElementById("main").innerHTML = "";
     document.getElementById("main").innerHTML = `Hej ${userName}! Välkommen till inloggat läge. <br> <img src="img/grad_dance1_blue.gif" width="400" height="auto">`;
